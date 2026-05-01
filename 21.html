@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Health For All | আন্দোলনে যোগ দিন | Premium Live</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root{
+      --white:#ffffff;
+      --muted:#dbe4f0;
+      --orange:#ff8a00;
+      --gold:#ffc837;
+      --line:rgba(255,255,255,0.12);
+      --shadow:0 20px 50px rgba(0,0,0,.55);
+      --card-bg:rgba(255,255,255,0.04);
+    }
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      scroll-behavior:smooth;
+      transition:all .35s ease;
+    }
+
+    body{
+      font-family:'Hind Siliguri',sans-serif;
+      color:var(--white);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(255,170,0,0.10), transparent 22%),
+        radial-gradient(circle at 85% 15%, rgba(255,255,255,0.07), transparent 20%),
+        radial-gradient(circle at 50% 85%, rgba(255,140,0,0.10), transparent 25%),
+        linear-gradient(135deg,#020202 0%,#070b14 25%,#0b1020 55%,#111827 75%,#000000 100%);
+      min-height:100vh;
+      overflow-x:hidden;
+      position:relative;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:
+        linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+      background-size:50px 50px;
+      pointer-events:none;
+      z-index:-2;
+    }
+
+    body::after{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:radial-gradient(circle at center, transparent 35%, rgba(0,0,0,0.58) 100%);
+      pointer-events:none;
+      z-index:-1;
+    }
+
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
+
+    /* ========== SCROLL TO TOP BUTTON ========== */
+    .scroll-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--gold), var(--orange));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+      box-shadow: 0 5px 20px rgba(255,138,0,0.4);
+    }
+    .scroll-top.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    .scroll-top:hover {
+      transform: translateY(-5px) scale(1.05);
+    }
+    .scroll-top i {
+      color: #020617;
+      font-size: 1.2rem;
+    }
+
+    /* ========== NAVBAR ========== */
+    .navbar{
+      position:sticky;
+      top:0;
+      z-index:999;
+      backdrop-filter:blur(16px);
+      background:rgba(0,0,0,0.30);
+      border-bottom:1px solid var(--line);
+    }
+
+    .nav-wrap{
+      max-width:1320px;
+      margin:auto;
+      padding:12px 20px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    .logo{
+      font-size:1.15rem;
+      font-weight:900;
+      cursor:pointer;
+      background: linear-gradient(90deg, var(--white), var(--gold));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .logo:hover{
+      transform:scale(1.05);
+      text-shadow:0 0 18px rgba(255,255,255,.25);
+    }
+
+    .nav-links{
+      display:flex;
+      gap:18px;
+    }
+
+    .nav-links a{
+      font-size:.9rem;
+      color:var(--muted);
+      font-weight:600;
+      position:relative;
+    }
+
+    .nav-links a::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-4px;
+      width:0;
+      height:2px;
+      background:linear-gradient(90deg,#fff,#ffc837,#ff8a00);
+    }
+
+    .nav-links a:hover{
+      color:#fff;
+      transform:translateY(-2px);
+    }
+
+    .nav-links a:hover::after{
+      width:100%;
+    }
+
+    /* ========== HERO ========== */
+    .hero{
+      max-width:1320px;
+      margin:auto;
+      min-height:88vh;
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:22px;
+      align-items:center;
+      padding:28px 20px 50px;
+    }
+
+    .hero-badge{
+      display:inline-block;
+      padding:8px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.05);
+      border:1px solid var(--line);
+      font-size:.72rem;
+      margin-bottom:18px;
+      font-weight:700;
+    }
+
+    .hero-title{
+      font-size:clamp(3.2rem,8vw,7.2rem);
+      font-weight:900;
+      line-height:.88;
+      letter-spacing:-3px;
+      margin-bottom:18px;
+      text-transform:uppercase;
+    }
+
+    .hero-title .gradient{
+      display:block;
+      background:linear-gradient(to bottom,#ffffff 0%,#f8fafc 35%,#dbe4f0 65%,#94a3b8 100%);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .hero-title:hover{
+      transform:scale(1.01);
+      text-shadow:0 0 24px rgba(255,255,255,.12);
+    }
+
+    .hero-subtitle{
+      max-width:580px;
+      color:var(--muted);
+      font-size:.95rem;
+      line-height:1.75;
+      margin-bottom:24px;
+    }
+
+    .hero-buttons{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:26px;
+    }
+
+    .btn{
+      padding:12px 24px;
+      border-radius:999px;
+      font-size:.88rem;
+      font-weight:800;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      position:relative;
+      overflow:hidden;
+      cursor: pointer;
+    }
+
+    .btn::before{
+      content:"";
+      position:absolute;
+      top:0;
+      left:-120%;
+      width:70%;
+      height:100%;
+      background:linear-gradient(120deg,transparent,rgba(255,255,255,.35),transparent);
+    }
+
+    .btn:hover::before{
+      left:130%;
+    }
+
+    .btn-primary{
+      background:linear-gradient(90deg,#ffffff,#ffc837,#ff8a00);
+      color:#111827;
+      box-shadow:0 0 25px rgba(255,138,0,.18);
+    }
+
+    .btn-primary:hover{
+      transform:translateY(-5px);
+    }
+
+    .btn-secondary{
+      background:rgba(255,255,255,0.04);
+      border:1px solid var(--line);
+    }
+
+    .btn-secondary:hover{
+      border-color:#ffc837;
+      transform:translateY(-5px);
+    }
+
+    /* STATS */
+    .hero-stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+    }
+
+    .stat{
+      padding:14px;
+      border-radius:16px;
+      background:rgba(255,255,255,0.04);
+      border:1px solid var(--line);
+      cursor:pointer;
+    }
+
+    .stat:hover{
+      transform:translateY(-8px);
+      border-color:rgba(255,200,55,.35);
+    }
+
+    .stat h3{
+      font-size:1.45rem;
+      margin-bottom:4px;
+    }
+
+    .stat p{
+      font-size:.78rem;
+      color:var(--muted);
+    }
+
+    /* RIGHT CARD */
+    .hero-right{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+
+    .main-card{
+      width:76%;
+      padding:22px;
+      border-radius:26px;
+      background:
+        linear-gradient(160deg, rgba(255,255,255,.08), rgba(255,200,55,.06), rgba(255,138,0,.07)),
+        rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.12);
+      backdrop-filter:blur(18px);
+      box-shadow:var(--shadow);
+      cursor:pointer;
+    }
+
+    .main-card:hover{
+      transform:translateY(-8px);
+    }
+
+    .mini-badge{
+      display:inline-block;
+      padding:6px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,0.08);
+      font-size:.68rem;
+      margin-bottom:14px;
+      font-weight:700;
+    }
+
+    .main-card h2{
+      font-size:2.35rem;
+      line-height:.95;
+      font-weight:900;
+      margin-bottom:12px;
+    }
+
+    .main-card p{
+      font-size:.9rem;
+      color:var(--muted);
+      line-height:1.75;
+      margin-bottom:18px;
+    }
+
+    .issue-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:10px;
+    }
+
+    .issue{
+      padding:12px;
+      border-radius:16px;
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.08);
+      cursor:pointer;
+    }
+
+    .issue:hover{
+      transform:translateY(-6px);
+      border-color:rgba(255,200,55,.35);
+    }
+
+    .issue i{
+      font-size:1rem;
+      color:var(--gold);
+      margin-bottom:8px;
+    }
+
+    .issue h4{
+      font-size:.9rem;
+      margin-bottom:4px;
+    }
+
+    .issue p{
+      font-size:.72rem;
+      margin:0;
+    }
+
+    /* ========== SERVICES SECTION ========== */
+    section{
+      padding:70px 20px;
+    }
+
+    .section-wrap{
+      max-width:1320px;
+      margin:auto;
+    }
+
+    .section-head{
+      text-align:center;
+      max-width:760px;
+      margin:0 auto 38px;
+    }
+
+    .section-head h2{
+      font-size:clamp(1.9rem,4vw,3.4rem);
+      font-weight:900;
+      margin-bottom:10px;
+      background: linear-gradient(90deg, var(--white), var(--gold));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .section-head p{
+      font-size:.92rem;
+      color:var(--muted);
+      line-height:1.75;
+    }
+
+    .services{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+    }
+
+    .service{
+      padding:22px;
+      border-radius:22px;
+      background:rgba(255,255,255,0.05);
+      border:1px solid var(--line);
+      cursor:pointer;
+    }
+
+    .service:hover{
+      transform:translateY(-10px);
+      border-color:rgba(255,200,55,.35);
+    }
+
+    .service i{
+      font-size:1.8rem;
+      margin-bottom:14px;
+      background:linear-gradient(90deg,#fff,#ffc837,#ff8a00);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .service h3{
+      font-size:1.05rem;
+      margin-bottom:8px;
+    }
+
+    .service p{
+      font-size:.84rem;
+      color:var(--muted);
+      line-height:1.7;
+    }
+
+    /* ========== TESTIMONIALS (NEW) ========== */
+    .testimonials {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .testimonial-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 24px;
+      transition: 0.3s;
+    }
+    .testimonial-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255,200,55,0.4);
+    }
+    .testimonial-card i.fa-quote-left {
+      color: var(--gold);
+      font-size: 1.5rem;
+      opacity: 0.5;
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+    .testimonial-card p {
+      font-size: 0.85rem;
+      line-height: 1.7;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+    .testimonial-card h4 {
+      font-size: 0.85rem;
+      color: var(--gold);
+    }
+    .testimonial-card span {
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+
+    /* ========== FAQ SECTION (NEW) ========== */
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 16px;
+      margin-top: 30px;
+    }
+    .faq-item {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 20px;
+      transition: 0.3s;
+    }
+    .faq-item:hover {
+      border-color: rgba(255,200,55,0.4);
+    }
+    .faq-item h4 {
+      font-size: 1rem;
+      margin-bottom: 10px;
+      color: var(--gold);
+    }
+    .faq-item p {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ========== NEWSLETTER SECTION (NEW) ========== */
+    .newsletter {
+      max-width: 700px;
+      margin: 40px auto 0;
+      text-align: center;
+      padding: 40px 24px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--line);
+      border-radius: 32px;
+    }
+    .newsletter h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+    .newsletter p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+    .newsletter-form {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .newsletter-form input {
+      padding: 12px 20px;
+      border-radius: 60px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.08);
+      color: var(--white);
+      font-size: 0.85rem;
+      width: 260px;
+      outline: none;
+    }
+    .newsletter-form input:focus {
+      border-color: var(--gold);
+    }
+    .newsletter-form button {
+      padding: 12px 28px;
+      border-radius: 60px;
+      border: none;
+      background: linear-gradient(90deg, var(--gold), var(--orange));
+      color: #020617;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .newsletter-form button:hover {
+      transform: translateY(-3px);
+    }
+
+    /* ========== SUPPORTERS SECTION (NEW) ========== */
+    .supporters {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin-top: 40px;
+      opacity: 0.6;
+    }
+    .supporters span {
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 1px;
+    }
+
+    /* ========== CTA SECTION ========== */
+    .cta{
+      max-width:1100px;
+      margin:auto;
+      padding:42px 24px;
+      border-radius:28px;
+      text-align:center;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,200,55,.08), rgba(255,138,0,.06)),
+        rgba(255,255,255,0.04);
+      border:1px solid var(--line);
+    }
+
+    .cta:hover{
+      transform:translateY(-8px);
+    }
+
+    .cta h2{
+      font-size:clamp(2rem,4vw,4rem);
+      font-weight:900;
+      margin-bottom:12px;
+    }
+
+    .cta p{
+      font-size:.92rem;
+      max-width:720px;
+      margin:0 auto 20px;
+      color:var(--muted);
+      line-height:1.8;
+    }
+
+    /* ========== FOOTER ========== */
+    footer{
+      padding:30px 20px;
+      text-align:center;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+    }
+
+    .socials{
+      display:flex;
+      justify-content:center;
+      gap:10px;
+      margin-bottom:14px;
+      flex-wrap:wrap;
+    }
+
+    .socials a{
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(255,255,255,0.05);
+      border:1px solid var(--line);
+    }
+
+    .socials a:hover{
+      transform:translateY(-5px) scale(1.05);
+      border-color:#ff8a00;
+    }
+
+    footer p{
+      font-size:.82rem;
+    }
+
+    /* ========== ANIMATION FOR LIVE COUNTER ========== */
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.7; }
+      100% { opacity: 1; }
+    }
+    .live-badge {
+      animation: pulse 2s infinite;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media(max-width:1100px){
+      .hero{
+        grid-template-columns:1fr;
+      }
+      .services{
+        grid-template-columns:1fr 1fr;
+      }
+    }
+
+    @media(max-width:768px){
+      .nav-links{
+        display:none;
+      }
+      .hero{
+        padding:20px 16px 40px;
+      }
+      .hero-title{
+        font-size:clamp(2.5rem,11vw,4.4rem);
+      }
+      .hero-subtitle{
+        font-size:.88rem;
+      }
+      .hero-stats,
+      .services,
+      .issue-grid{
+        grid-template-columns:1fr;
+      }
+      .btn{
+        width:100%;
+        justify-content:center;
+      }
+      .main-card{
+        width:100%;
+        padding:18px;
+      }
+      .main-card h2{
+        font-size:2rem;
+      }
+      .faq-grid{
+        grid-template-columns:1fr;
+      }
+      .newsletter-form input {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SCROLL TO TOP BUTTON -->
+  <div class="scroll-top" id="scrollTop">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+  <nav class="navbar">
+    <div class="nav-wrap">
+      <div class="logo">HEALTH FOR ALL</div>
+      <div class="nav-links">
+        <a href="#services">কার্যক্রম</a>
+        <a href="#testimonials">অভিজ্ঞতা</a>
+        <a href="#faq">সচরাচর জিজ্ঞাসা</a>
+        <a href="#join">যোগ দিন</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div>
+      <div class="hero-badge live-badge">
+        <i class="fas fa-users"></i> <span id="liveTeamCount">৫,২৪৭</span> জন সক্রিয় সদস্য
+      </div>
+
+      <h1 class="hero-title">
+        <span class="gradient">আমার স্বাস্থ্য</span>
+        <span class="gradient">আমার অধিকার</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        দুর্নীতিমুক্ত, মানবিক ও ন্যায়ভিত্তিক স্বাস্থ্যসেবা নিশ্চিত করতে প্রযুক্তি, সচেতনতা এবং জনগণের শক্তিকে একত্রিত করার compact cinematic movement।
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#join" class="btn btn-primary">
+          <i class="fas fa-bolt"></i> আন্দোলনে যুক্ত হোন
+        </a>
+        <a href="#services" class="btn btn-secondary">
+          <i class="fas fa-layer-group"></i> কার্যক্রম দেখুন
+        </a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <h3>১০K+</h3>
+          <p>সচেতন নাগরিক</p>
+        </div>
+        <div class="stat">
+          <h3>৫০০+</h3>
+          <p>অভিযোগ বিশ্লেষণ</p>
+        </div>
+        <div class="stat">
+          <h3>২৪/৭</h3>
+          <p>সামাজিক শক্তি</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="main-card">
+        <span class="mini-badge">Modern Health Movement</span>
+        <h2>STOP<br>HEALTH<br>CORRUPTION</h2>
+        <p>তথ্য, ন্যায়বিচার ও জনসচেতনতার মাধ্যমে স্বাস্থ্যখাতে স্বচ্ছতা প্রতিষ্ঠা।</p>
+        <div class="issue-grid">
+          <div class="issue">
+            <i class="fas fa-ban"></i>
+            <h4>দুর্নীতি প্রতিরোধ</h4>
+            <p>অপ্রয়োজনীয় টেস্ট ও কমিশন বন্ধ।</p>
+          </div>
+          <div class="issue">
+            <i class="fas fa-user-doctor"></i>
+            <h4>সৎ ডাক্তার</h4>
+            <p>বিশ্বস্ত চিকিৎসক নেটওয়ার্ক।</p>
+          </div>
+          <div class="issue">
+            <i class="fas fa-scale-balanced"></i>
+            <h4>অধিকার</h4>
+            <p>নাগরিক স্বাস্থ্য সুরক্ষা।</p>
+          </div>
+          <div class="issue">
+            <i class="fas fa-bullhorn"></i>
+            <h4>সচেতনতা</h4>
+            <p>মানুষের কাছে সত্য পৌঁছে দেওয়া।</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="services">
+    <div class="section-wrap">
+      <div class="section-head">
+        <h2>আমাদের মূল শক্তি</h2>
+        <p>স্বচ্ছ, মানবিক ও জবাবদিহিমূলক স্বাস্থ্যসেবা নিশ্চিত করা।</p>
+      </div>
+      <div class="services">
+        <div class="service">
+          <i class="fas fa-ban"></i>
+          <h3>দুর্নীতি প্রতিরোধ</h3>
+          <p>অনৈতিক কমিশন ও অপ্রয়োজনীয় স্বাস্থ্যব্যবস্থার বিরুদ্ধে শক্তিশালী জনসচেতনতা।</p>
+        </div>
+        <div class="service">
+          <i class="fas fa-user-doctor"></i>
+          <h3>বিশ্বস্ত চিকিৎসক</h3>
+          <p>সৎ, দায়িত্বশীল ও মানবিক চিকিৎসাসেবাকে সামনে আনা।</p>
+        </div>
+        <div class="service">
+          <i class="fas fa-scale-balanced"></i>
+          <h3>নাগরিক অধিকার</h3>
+          <p>ভুল চিকিৎসা, অবহেলা ও প্রতারণার বিরুদ্ধে সহায়তা।</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS SECTION (NEW) -->
+  <section id="testimonials">
+    <div class="section-wrap">
+      <div class="section-head">
+        <h2>মানুষের কথা</h2>
+        <p>আমাদের আন্দোলনে যুক্ত হওয়া মানুষের অভিজ্ঞতা</p>
+      </div>
+      <div class="testimonials">
+        <div class="testimonial-card">
+          <i class="fas fa-quote-left"></i>
+          <p>"সৎ ডাক্তারের তালিকা পেয়ে আমি সঠিক চিকিৎসা পেয়েছি। এই প্ল্যাটফর্ম সত্যিই আশীর্বাদ।"</p>
+          <h4>— রোকেয়া বেগম</h4>
+          <span>ঢাকা</span>
+        </div>
+        <div class="testimonial-card">
+          <i class="fas fa-quote-left"></i>
+          <p>"অপ্রয়োজনীয় টেস্ট বন্ধের আন্দোলন আমার পরিবারকে হাজার টাকা বাঁচিয়েছে। ধন্যবাদ সবাইকে।"</p>
+          <h4>— মিজানুর রহমান</h4>
+          <span>চট্টগ্রাম</span>
+        </div>
+        <div class="testimonial-card">
+          <i class="fas fa-quote-left"></i>
+          <p>"চিকিৎসা অবহেলার শিকার হয়ে আইনি সাহায্য পেয়েছি। এখন আমি আত্মবিশ্বাসী।"</p>
+          <h4>— জান্নাতুল ফেরদৌস</h4>
+          <span>রাজশাহী</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ SECTION (NEW) -->
+  <section id="faq">
+    <div class="section-wrap">
+      <div class="section-head">
+        <h2>সচরাচর জিজ্ঞাসা</h2>
+        <p>আমাদের নিয়ে সাধারণ কিছু প্রশ্ন ও উত্তর</p>
+      </div>
+      <div class="faq-grid">
+        <div class="faq-item">
+          <h4><i class="fas fa-question-circle"></i> কীভাবে যোগ দেব?</h4>
+          <p>আপনি উপরের "আন্দোলনে যুক্ত হোন" বাটনে ক্লিক করে আমাদের ফেসবুক গ্রুপ/কমিউনিটিতে জয়েন করতে পারেন।</p>
+        </div>
+        <div class="faq-item">
+          <h4><i class="fas fa-check-circle"></i> সৎ ডাক্তার তালিকা কীভাবে পাব?</h4>
+          <p>শীঘ্রই আমরা একটি ভেরিফাইড ডাক্তার ডিরেক্টরি লঞ্চ করছি। আপডেট পেতে নিউজলেটার সাবস্ক্রাইব করুন।</p>
+        </div>
+        <div class="faq-item">
+          <h4><i class="fas fa-gavel"></i> আইনি সহায়তা কি বিনামূল্যে?</h4>
+          <p>হ্যাঁ, আমাদের আইনি টিম স্বেচ্ছাসেবী ভিত্তিতে প্রাথমিক পরামর্শ দিয়ে থাকে।</p>
+        </div>
+        <div class="faq-item">
+          <h4><i class="fas fa-shield-alt"></i> অভিযোগ কনফিডেনশিয়াল থাকে?</h4>
+          <p>অবশ্যই। আপনার ব্যক্তিগত তথ্য গোপন রাখা হয় এবং শুধুমাত্র প্রয়োজনীয় ক্ষেত্রে ব্যবহার করা হয়।</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER SECTION (NEW) -->
+  <div class="section-wrap">
+    <div class="newsletter">
+      <h3><i class="fas fa-envelope"></i> আপডেট পেতে সাবস্ক্রাইব করুন</h3>
+      <p>সৎ ডাক্তার তালিকা, স্বাস্থ্য টিপস ও আন্দোলনের খবর প্রথমে পেতে ইমেইল দিন</p>
+      <form class="newsletter-form" id="newsletterForm">
+        <input type="email" placeholder="আপনার ইমেইল ঠিকানা" required>
+        <button type="submit">সাবস্ক্রাইব <i class="fas fa-arrow-right"></i></button>
+      </form>
+    </div>
+  </div>
+
+  <section id="join">
+    <div class="cta">
+      <h2>JOIN THE MOVEMENT</h2>
+      <p>একটি উন্নত, দুর্নীতিমুক্ত ও মানবিক স্বাস্থ্যব্যবস্থা গড়তে আপনার অংশগ্রহণই সবচেয়ে বড় শক্তি।</p>
+      <a href="#" class="btn btn-primary">
+        <i class="fas fa-rocket"></i> আজই যুক্ত হোন
+      </a>
+    </div>
+  </section>
+
+  <!-- SUPPORTERS (NEW) -->
+  <div class="section-wrap" style="text-align: center; padding: 20px;">
+    <div class="supporters">
+      <span>✦ স্বাস্থ্য অধিকার ফোরাম</span>
+      <span>✦ নাগরিক কমিটি</span>
+      <span>✦ সৎ ডাক্তার নেটওয়ার্ক</span>
+      <span>✦ আইনি সহায়তা টিম</span>
+    </div>
+  </div>
+
+  <footer>
+    <div class="socials">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-whatsapp"></i></a>
+      <a href="#"><i class="fas fa-envelope"></i></a>
+      <a href="#"><i class="fas fa-globe"></i></a>
+    </div>
+    <p>&copy; ২০২৬ Health For All — Compact Premium Live | স্বচ্ছতা · মানবিকতা · ন্যায়বিচার</p>
+  </footer>
+
+  <script>
+    // ========== LIVE TEAM COUNTER ==========
+    let teamCount = 5247;
+    const teamSpan = document.getElementById('liveTeamCount');
+    if(teamSpan) {
+      setInterval(() => {
+        let increment = Math.floor(Math.random() * 4);
+        teamCount += increment;
+        if(teamCount > 5400) teamCount = 5200;
+        teamSpan.innerText = teamCount.toLocaleString('bn-BD');
+      }, 7000);
+    }
+
+    // ========== SCROLL TO TOP BUTTON ==========
+    const scrollBtn = document.getElementById('scrollTop');
+    window.addEventListener('scroll', () => {
+      if(window.scrollY > 300) {
+        scrollBtn.classList.add('show');
+      } else {
+        scrollBtn.classList.remove('show');
+      }
+    });
+    scrollBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // ========== NEWSLETTER SUBSCRIPTION ALERT ==========
+    const newsletterForm = document.getElementById('newsletterForm');
+    if(newsletterForm) {
+      newsletterForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const input = newsletterForm.querySelector('input');
+        if(input.value) {
+          alert('ধন্যবাদ! আপনি আমাদের সাবস্ক্রাইবার তালিকায় যুক্ত হয়েছেন।');
+          input.value = '';
+        }
+      });
+    }
+
+    // ========== SMOOTH SCROLL FOR NAV LINKS ==========
+    document.querySelectorAll('.nav-links a, .btn-secondary, .btn-primary').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if(href && href.startsWith('#')) {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if(target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
